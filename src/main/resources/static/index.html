@@ -429,9 +429,9 @@
                 </div>            </div>
 
 
-            <div class="about-visual reveal-item">
+            <div class="about-visual">
 
-                <div class="about-image-wrapper">
+                <div class="about-image-wrapper reveal-item">
 
                     <div class="about-image-glow"></div>
 
@@ -444,7 +444,7 @@
                 </div>
 
 
-                <div class="approach-card">
+                <div class="approach-card reveal-item">
 
                     <h3 class="card-title text-accent">
                         My Approach
@@ -493,7 +493,7 @@
 
                     <h2 class="section-title">
 
-                        Things I’ve built <br>
+                        Featured Projects <br>
 
 
                     </h2>
@@ -530,6 +530,12 @@
                             alt="Project 4"
                             class="project-image"
                             id="img-4"
+                    >
+                    <img
+                            src="assets/images/Lead Generation.png"
+                            alt="Project 5"
+                            class="project-image"
+                            id="img-5"
                     >
 
                 </div>
@@ -710,7 +716,9 @@
                             </svg>
 
                         </a>
+
                     </div>
+
 
                 </article>
 
@@ -743,7 +751,63 @@
 
                             </p>
 
+                        </div>
 
+                        <a
+                                href="#"
+                                class="project-link-btn"
+                                aria-label="View Project"
+                        >
+
+                            <svg
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                            >
+
+                                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+
+                                <polyline points="13 7 17 7 17 11"/>
+
+                            </svg>
+
+                        </a>
+                    </div>
+
+                </article>
+
+
+                <article
+                        class="project-story"
+                        id="project-5"
+                        data-index="5"
+                >
+
+                    <div class="project-card">
+                        <div class="project-info">
+
+                            <div class="project-category">
+                                AI AUTOMATION
+                            </div>
+
+                            <h3 class="project-title">
+                                Instagram Lead Generation
+                            </h3>
+
+                            <p class="project-desc">
+
+                                An automated lead generation system that transforms a niche
+                                and location into a clean, structured list of relevant Instagram leads.
+                                You provide two things: who you're looking for and where. That's it.
+                                It finds relevant profiles, extracts key business and contact details,
+                                removes duplicates, organizes everything in Google Sheets, and automatically
+                                notifies you when the leads are ready.
+
+
+                            </p>
 
                         </div>
 
@@ -807,8 +871,8 @@
                     something <br>
 
                     <span class="text-accent">
-                    meaningful.
-                </span>
+                meaningful.
+            </span>
 
                 </h2>
 
@@ -819,8 +883,8 @@
                     smarter approach?
 
                     <span class="text-accent">
-                    Let's talk about it.
-                </span>
+                Let's talk about it.
+            </span>
 
                 </p>
 
@@ -856,8 +920,8 @@
                         </div>
 
                         <span>
-                        rehanabrar56@gmail.com
-                    </span>
+                    rehanabrar56@gmail.com
+                </span>
 
                     </a>
 
@@ -902,8 +966,8 @@
                         </div>
 
                         <span>
-                        linkedin.com/rehan abrar
-                    </span>
+                    linkedin.com/rehan abrar
+                </span>
 
                     </a>
 
@@ -936,8 +1000,8 @@
                         </div>
 
                         <span>
-                        Lahore, Pakistan
-                    </span>
+                    Lahore, Pakistan
+                </span>
 
                     </div>
 
@@ -953,6 +1017,9 @@
 
                 <form class="contact-form" id="contact-form">
 
+                    <!-- Web3Forms Access Key Hidden Input -->
+                    <input type="hidden" name="access_key" value="ed5359af-7e25-4da0-80e5-c5a3832de326">
+
                     <div class="form-row">
 
                         <div class="form-group">
@@ -964,6 +1031,7 @@
                             <input
                                     type="text"
                                     id="name"
+                                    name="name"
                                     placeholder="Enter your name"
                                     required
                             >
@@ -980,6 +1048,7 @@
                             <input
                                     type="email"
                                     id="email"
+                                    name="email"
                                     placeholder="Enter your email"
                                     required
                             >
@@ -996,6 +1065,7 @@
 
                         <textarea
                                 id="message"
+                                name="message"
                                 rows="4"
                                 placeholder="Share your idea, goals, and what you're trying to build..."
                                 required
@@ -1041,6 +1111,7 @@
 
         </div>
 
+    </section>
 
 
         <!-- ============================================================
