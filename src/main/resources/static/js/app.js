@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
+
+
     /* ================================================================
        REHAN OPENING TITLE CARD
-       Plays once before the existing hero entrance sequence.
        ================================================================ */
 
     const rehanIntro = document.getElementById('rehan-intro');
@@ -49,19 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
         startHeroSequence();
     }
 
-    /* ================================================================
-       CINEMATIC INTRO TIMELINE
-       Hero scene → text → navigation
-       ================================================================ */
 
     /* ================================================================
        CINEMATIC INTRO TIMELINE
-       Hero scene → text → navigation
        ================================================================ */
 
     const navbar = document.getElementById('navbar');
     const hero = document.getElementById('hero');
     const portrait = document.querySelector('.hero-portrait');
+
     const heroRevealItems = hero
         ? hero.querySelectorAll('.hero-content .reveal-item')
         : [];
@@ -87,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!navbar || !hero) return;
 
         if (prefersReducedMotion) {
+
             document.body.classList.remove('intro-loading');
 
             navbar.classList.remove('intro-hidden');
@@ -113,10 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         hero.classList.add('intro-start');
 
-        /*
-         * Force the browser to commit the initial hidden state
-         * before starting the sequence.
-         */
         requestAnimationFrame(() => {
 
             requestAnimationFrame(() => {
@@ -124,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hero.classList.add('intro-ready');
 
                 if (portrait) {
+
                     setTimeout(() => {
                         portrait.classList.add('intro-visible');
                     }, INTRO.portrait);
@@ -174,8 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     };
-
-
 
 
     /* ================================================================
@@ -283,12 +277,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
 
-                    /*
-                     * Hero is controlled by the cinematic timeline.
-                     * Do not let the observer reveal it early.
-                     */
                     if (entry.target.closest('#hero')) {
-                        if (!entry.target.classList.contains('intro-visible')) {
+
+                        if (
+                            !entry.target.classList.contains('intro-visible')
+                        ) {
                             return;
                         }
                     }
@@ -297,19 +290,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     observer.unobserve(entry.target);
                 });
+
             },
             revealOptions
         );
 
     revealElements.forEach(element => {
 
-        /*
-         * Hero items are revealed by the intro timeline.
-         * Everything else remains observer-driven.
-         */
         if (!element.closest('#hero')) {
             revealOnScroll.observe(element);
         }
+
     });
 
 
@@ -331,7 +322,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!cinematicScreen || !imgEl) return;
 
         const setRatio = () => {
-            if (imgEl.naturalWidth && imgEl.naturalHeight) {
+
+            if (
+                imgEl.naturalWidth &&
+                imgEl.naturalHeight
+            ) {
+
                 cinematicScreen.style.setProperty(
                     '--img-ratio',
                     `${imgEl.naturalWidth} / ${imgEl.naturalHeight}`
@@ -342,7 +338,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (imgEl.complete) {
             setRatio();
         } else {
-            imgEl.addEventListener('load', setRatio, { once: true });
+            imgEl.addEventListener(
+                'load',
+                setRatio,
+                { once: true }
+            );
         }
     };
 
@@ -374,6 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     };
 
+
     if (
         window.innerWidth > 1024 &&
         projectStories.length
@@ -392,11 +393,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     entries.forEach(entry => {
 
                         if (entry.isIntersecting) {
+
                             activateProject(
                                 entry.target.dataset.index
                             );
                         }
                     });
+
                 },
                 workObserverOptions
             );
@@ -429,13 +432,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updatePortraitDepth = () => {
 
-            /*
-             * Do not apply parallax while the intro is running.
-             * This prevents the entrance transform from being overwritten.
-             */
             if (
                 document.body.classList.contains('intro-loading')
             ) {
+
                 ticking = false;
                 return;
             }
@@ -447,6 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 rect.bottom < 0 ||
                 rect.top > window.innerHeight
             ) {
+
                 ticking = false;
                 return;
             }
@@ -486,6 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     ticking = true;
                 }
+
             },
             { passive: true }
         );
@@ -535,121 +537,198 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ================================================================
-       ABOUT IMAGE TAP GLOW (mobile)
+       ABOUT IMAGE TAP GLOW (MOBILE)
        ================================================================ */
 
-    const aboutImageWrapper = document.querySelector('.about-image-wrapper');
+    const aboutImageWrapper =
+        document.querySelector('.about-image-wrapper');
 
     if (aboutImageWrapper) {
 
-        aboutImageWrapper.addEventListener('touchstart', () => {
-            aboutImageWrapper.classList.add('is-tapped');
-        }, { passive: true });
+        aboutImageWrapper.addEventListener(
+            'touchstart',
+            () => {
+                aboutImageWrapper.classList.add('is-tapped');
+            },
+            { passive: true }
+        );
 
-        aboutImageWrapper.addEventListener('touchend', () => {
-            setTimeout(() => {
-                aboutImageWrapper.classList.remove('is-tapped');
-            }, 600);
+        aboutImageWrapper.addEventListener(
+            'touchend',
+            () => {
 
-        });
+                setTimeout(() => {
+                    aboutImageWrapper.classList.remove('is-tapped');
+                }, 600);
+
+            }
+        );
     }
-        /* ================================================================
+
+
+    /* ================================================================
            CONTACT FORM SUBMISSION
            ================================================================ */
 
-        const contactForm = document.getElementById('contact-form');
+        const contactForm =
+            document.getElementById('contact-form');
 
         if (contactForm) {
 
-            contactForm.addEventListener('submit', async (event) => {
+            contactForm.addEventListener(
+                'submit',
+                async (event) => {
 
-                event.preventDefault();
+                    event.preventDefault();
 
-                const submitBtn = contactForm.querySelector('button[type="submit"]');
-                const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+                    const submitBtn =
+                        contactForm.querySelector(
+                            'button[type="submit"]'
+                        );
 
-                const payload = {
-                    name: document.getElementById('name').value.trim(),
-                    email: document.getElementById('email').value.trim(),
-                    message: document.getElementById('message').value.trim()
-                };
-
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = 'Sending...';
-                }
-
-                try {
-                    const response = await fetch('/api/contact', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Request failed');
-                    }
-
-                    contactForm.reset();
+                    const originalBtnText =
+                        submitBtn
+                            ? submitBtn.innerHTML
+                            : '';
 
                     if (submitBtn) {
-                        submitBtn.innerHTML = 'Message Sent ✓';
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = 'Sending...';
                     }
 
-                    setTimeout(() => {
+                    const formData = new FormData(contactForm);
+
+                    try {
+
+                        const response = await fetch(
+                            'https://api.web3forms.com/submit',
+                            {
+                                method: 'POST',
+                                body: formData
+                            }
+                        );
+
+                        const data = await response.json();
+
+                        if (data.success) {
+
+                            contactForm.reset();
+
+                            if (submitBtn) {
+                                submitBtn.innerHTML =
+                                    'Message Sent ✓';
+                            }
+
+                            setTimeout(() => {
+
+                                if (submitBtn) {
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML =
+                                        originalBtnText;
+                                }
+
+                            }, 2500);
+
+                        } else {
+                            throw new Error(
+                                data.message || 'Something went wrong.'
+                            );
+                        }
+
+                    } catch (error) {
+
+                        console.error(
+                            'Contact form error:',
+                            error
+                        );
+
                         if (submitBtn) {
                             submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.innerHTML =
+                                originalBtnText;
                         }
-                    }, 2500);
 
-                } catch (error) {
-
-                    if (submitBtn) {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalBtnText;
+                        alert(
+                            'Something went wrong. Please try again.'
+                        );
                     }
-
-                    alert('Something went wrong. Please try again or email me directly.');
                 }
-            });
+            );
         }
-            /* ================================================================
-               AI NETWORK ACTIVATION SEQUENCE
-               ================================================================ */
 
-            const orbitDiagram = document.getElementById('orbit-diagram');
+    /* ================================================================
+       AI NETWORK ACTIVATION SEQUENCE
+       ================================================================ */
 
-            if (orbitDiagram) {
+    const orbitDiagram =
+        document.getElementById('orbit-diagram');
 
-                const orbitSequence = ['gemini', 'n8n', 'pinecone', 'mysql', 'java'];
+    if (orbitDiagram) {
 
-                const activateOrbitStep = (index) => {
+        const orbitSequence = [
+            'gemini',
+            'n8n',
+            'pinecone',
+            'mysql',
+            'java'
+        ];
 
-                    if (index >= orbitSequence.length) {
-                        orbitDiagram.classList.add('orbit-diagram--active');
-                        return;
-                    }
+        const activateOrbitStep = (index) => {
 
-                    const key = orbitSequence[index];
+            if (index >= orbitSequence.length) {
 
-                    const line = document.getElementById(`line-${key}`);
-                    const node = document.getElementById(`node-${key}`);
-                    const pulse = document.getElementById(`pulse-${key}`);
+                orbitDiagram.classList.add(
+                    'orbit-diagram--active'
+                );
 
-                    if (line) line.classList.add('is-drawn');
-                    if (node) node.classList.add('is-visible');
+                return;
+            }
 
-                    setTimeout(() => {
-                        if (pulse) pulse.classList.add('is-active');
-                    }, 500);
+            const key =
+                orbitSequence[index];
 
-                    setTimeout(() => {
-                        activateOrbitStep(index + 1);
-                    }, 550);
-                };
+            const line =
+                document.getElementById(
+                    `line-${key}`
+                );
 
-                const orbitObserver = new IntersectionObserver((entries, observer) => {
+            const node =
+                document.getElementById(
+                    `node-${key}`
+                );
+
+            const pulse =
+                document.getElementById(
+                    `pulse-${key}`
+                );
+
+            if (line) {
+                line.classList.add('is-drawn');
+            }
+
+            if (node) {
+                node.classList.add('is-visible');
+            }
+
+            setTimeout(() => {
+
+                if (pulse) {
+                    pulse.classList.add('is-active');
+                }
+
+            }, 500);
+
+            setTimeout(() => {
+
+                activateOrbitStep(index + 1);
+
+            }, 550);
+        };
+
+
+        const orbitObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
 
                     entries.forEach(entry => {
 
@@ -659,14 +738,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                 activateOrbitStep(0);
                             }, 400);
 
-                            observer.unobserve(entry.target);
+                            observer.unobserve(
+                                entry.target
+                            );
                         }
+
                     });
 
-                }, { threshold: 0.4 });
+                },
+                {
+                    threshold: 0.4
+                }
+            );
 
-                orbitObserver.observe(orbitDiagram);
-            }
-
+        orbitObserver.observe(orbitDiagram);
+    }
 
 });
